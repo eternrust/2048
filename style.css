@@ -1,0 +1,239 @@
+#title{
+    display: flex;
+    margin: auto;
+    margin-top: 10%;
+    justify-content: center;
+    font-size: 80px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+#title span{
+    transition:  all 1s;
+}
+
+body{
+    background-color: rgb(230, 192, 88);
+    overflow-y: hidden
+}
+
+#hidden{
+    display:none;
+    position: relative;
+    transition:  all 1s;
+    margin: auto;
+    margin-top: 1%;
+    justify-content: center;
+    flex-direction: column;
+    width: 440px;
+    height: 540px;
+}
+#score_and_best{
+    display: flex;
+    font-size: 20px;
+    justify-content: flex-end;
+}
+
+#score_borad{
+    display:flex;
+    flex-direction: column;
+    background-color:darkgoldenrod;
+    border: 5px solid rgb(230, 192, 88);
+    align-items: center;
+    color:white;
+    border-radius: 0.5rem;
+    width: 100px;
+    height: 60px;
+}
+#best_borad{
+    display:flex;
+    flex-direction: column;
+    background-color:darkgoldenrod;
+    border: 5px solid rgb(230, 192, 88);
+    align-items: center;
+    color:white;
+    border-radius: 0.5rem;
+    width: 100px;
+    height: 60px;
+}
+#New_Game{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-right:5px;
+    width: 100px;
+    height: 40px;
+    background-color:#6F4F28;
+    border: 5px solid rgb(230, 192, 88);
+    border-radius: 0.5rem;
+    color:white;
+}
+table#borad{
+    width: 440px;
+    height: 450px;
+    justify-content: center;
+    border: 5px solid gray;
+    background-color: lightgrey;
+    table-layout: fixed;
+}
+#boradup{
+    display:flex;
+    position: absolute;
+    margin-top: 80px;
+    margin-left:3px;
+    width: 400px;
+    height: 400px;
+}
+#boradup span{
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    color:lightgray;
+}
+#block1{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block2{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block3{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block4{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+
+#block5{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block6{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block7{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block8{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+
+#block9{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block10{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block11{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block12{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+
+#block13{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block14{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block15{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
+#block16{
+    display:flex;
+    transition:  all 1s;
+    margin: 4px 0 0 5px;
+    background-color: lightgrey;
+    border: 1px solid #666666;
+    width: 100px;
+    height: 100px;
+}
