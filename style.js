@@ -2,9 +2,34 @@ let cnt = 0;
 let borad = Array(Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0),Array(0,0,0,0));
 let boradID = Array(Array("block1","block2","block3","block4"),Array("block5","block6","block7","block8"),Array("block9","block10","block11","block12"),Array("block13","block14","block15","block16"));
 let score;
-let best=0;
+let best = 0
 let moveCnt = 0;
 let Gameover = document.querySelector("#Game_Over");
+
+function getCookie(name) {
+    let matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function setCookie(name, value, options = {}) {
+    options = {
+        path: '/', // 경로 지정
+        ...options // 아규먼트로 옵션을 넘겨줬을경우 전개연산자로 추가 갱신
+    };
+    if (options.expires instanceof Date) {
+        options.expires = options.expires.toUTCString(); // 생 Date 객체라면 형식에 맞게 인코딩
+    }
+    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    for (let optionKey in options) {
+        updatedCookie += "; " + optionKey;
+        let optionValue = options[optionKey];
+        if (optionValue !== true) { // 밸류가 없다면
+        updatedCookie += "=" + optionValue;
+        }
+    }
+    document.cookie = updatedCookie; // 새로 갱신
+}
 
 //키보드 입력 처리
 document.addEventListener("keydown",(e) => keyDownEventHandler(e));
@@ -22,8 +47,14 @@ function keyDownEventHandler(e){
 //초기 값 설정
 init();
 function init(){
+    if (!document.cookie) {
+        setCookie('best', {secure: true, 'max-age': 3600});
+        best=0;
+    } else {
+        best = getCookie('best');
+    }    
     score = 0;
-    Gameover.style.display = "none";
+    Gameover.style.visibility = "hidden";
     for(let i = 0; i < 4; i++){
         for(let j = 0; j < 4; j++){
             borad[i][j]=0;
@@ -48,7 +79,11 @@ function Update(){
         }
     }
     document.getElementById("score").innerHTML=score;
-    document.getElementById("best").innerHTML=score>best?score:best;
+    if(score>best){
+        best=score;
+        setCookie('best', best);
+    }
+    document.getElementById("best").innerHTML=best;
 }
 
 //블럭 색 바꾸기
@@ -137,10 +172,10 @@ function moveDir(e){
     if(moveCnt==1){
         getNewAddress();
         Update();
-    } else {
-        let l = CheckGameOver();
-        if(!l) GameOver(); 
     }
+    let l = CheckGameOver();
+    if(!l) setTimeout(()=> GameOver(),1000);
+    else if(l==2) setTimeout(()=> GameClear(),1000);
 }
 
 function rotate(e){
@@ -175,12 +210,13 @@ function move(){
                     moveCnt = 1;
                 } else if(borad[j-1][i]==borad[j][i]){
                     if(mul!=borad[j][i]){
-                    borad[j-1][i]*=2;
-                    borad[j][i]=0;
-                    mul=borad[j-1][i];
-                    j = 0;
+                        borad[j-1][i]*=2;
+                        borad[j][i]=0;
+                        mul=borad[j-1][i];
+                        j = 0;
+                        score+=mul;
                     } else if(num==2){
-                    mul=0;
+                        mul=0;
                     }
                     num++;
                     moveCnt = 1;
@@ -191,25 +227,37 @@ function move(){
 }
 
 function CheckGameOver(){
+    let cnt = 0;
     for(let i = 0; i < 4; i++){
         for(let j = 0; j < 4; j++){
-            if(borad[i][j]==0){
-                return 1;
+            if(borad[i][j]==2048){
+                cnt = 2;
+            }else if(borad[i][j]==0&&cnt==0){
+                cnt = 1;
             } else {
-                if(i>0&&borad[i-1][j]==borad[i][j]){
-                    return 1;
+                if(i>0&&borad[i-1][j]==borad[i][j]&&cnt==0){
+                    cnt = 1;
                 }
-                if(j>0&&borad[i][j-1]==borad[i][j]){
-                    return 1;
+                if(j>0&&borad[i][j-1]==borad[i][j]&&cnt==0){
+                    cnt = 1;
                 }
             }
         }
     }
-    return 0;
+    return cnt;
 }
 
 function GameOver(){
-    Gameover.style.display = "flex";
+    Gameover.style.visibility = "visible";
+    document.getElementById("GameOverTitle").innerHTML="Game Over!";
+    document.getElementById("GameOverTitle").style.color="#996600";
+    document.getElementById("Game_Over_background").style.backgroundColor="lightgray";
+}
+function GameClear(){
+    Gameover.style.visibility = "visible";
+    document.getElementById("GameOverTitle").innerHTML='You Win!';
+    document.getElementById("GameOverTitle").style.color="#FFFFFF";
+    document.getElementById("Game_Over_background").style.backgroundColor="#FFFF66";
 }
 
 function getNewAddress(){
@@ -225,10 +273,8 @@ function getNewAddress(){
 function getNewNum(){
     let rand = Math.floor(Math.random()*10);
     if(rand == 0){
-        score += 4;
         return 4;
     }
-    score += 2;
     return 2;
 }
         
@@ -252,19 +298,22 @@ function(e){
 //2048 글씨 색깔
 function darkorange(e){
     if(cnt===0){
-        e.target.style.color = "darkorange"
+        e.target.style.color = "darkorange";
     } else {
-        e.target.style.color = "black"
+        e.target.style.color = "black";
     }
 }
 function black(e){
     if(cnt===0){
-        e.target.style.color = "black"
+        e.target.style.color = "black";
     } else {
-        e.target.style.color = "darkorange"
+        e.target.style.color = "darkorange";
     }
 }
 
-function sleep(ms) {
-    return new Promise((r) => setTimeout(r, ms));
-  }
+function NewGameBorderOn(e){
+    e.target.style.outline = "3px solid #836035";
+}
+function NewGameBorderDown(e){
+    e.target.style.outline = "1px solid #836035";
+}

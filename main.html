@@ -28,7 +28,8 @@
                 <span id="best">0</span>
             </div>
         </div>
-        <input id="New_Game" type="button" value="New Game"/>
+        <input class="New_Game" type="button" onclick="init()"
+        value="New Game" onMouseover="NewGameBorderOn(event)" onMouseleave="NewGameBorderDown(event)"/>
         <table id="borad">
         </table>
         <div id="boradup">
@@ -58,8 +59,10 @@
             </div>
         </div>
         <div id="Game_Over">
-            <h1 id="GameOverTitle">Game Over!</h1>
-            <input id="Game_Over_New_Game" type="button" value="New Game"/>
+            <div id="Game_Over_background"></div>
+            <span id="GameOverTitle">Game Over!</span>
+            <input class="New_Game" style="position: absolute;" onclick="init()" type="button"
+            value="Try again" onMouseover="NewGameBorderOn(event)" onMouseleave="NewGameBorderDown(event)"/>
         </div>
     </div>
 </body>
